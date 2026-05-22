@@ -4992,10 +4992,19 @@ body.hasAssetPanel #eguDemoPanel{
     proj4.defs("EPSG:4326", "+proj=longlat +datum=WGS84 +no_defs");
   }
 
+  // ── R2 data bucket base URL ──
+  // All data files (GeoJSON, JSON, CSV, PNG) are served from Cloudflare R2.
+  // Replace this with your R2 public bucket URL after enabling public access.
+  const DATA_BASE = 'https://pub-661a81c70f75463eacb385f4a430e3d5.r2.dev/';
+
   function withCacheBust(url) {
     if (!url) return url;
-    const hasQ = url.includes("?");
-    return url + (hasQ ? "&" : "?") + CACHE_BUSTER;
+    // Prepend R2 base URL for relative data paths
+    const fullUrl = (url.startsWith('http') || url.startsWith('//') || url.startsWith('data:'))
+      ? url
+      : DATA_BASE + url;
+    const hasQ = fullUrl.includes("?");
+    return fullUrl + (hasQ ? "&" : "?") + CACHE_BUSTER;
   }
 
   // ----- GeoJSON CRS sanity helpers (alignment fix) -----
@@ -5201,10 +5210,10 @@ body.hasAssetPanel #eguDemoPanel{
   // ERA5-Land soil moisture (0-28 cm) files (kept in the ERA5_SOIL folder)
   // Note: browser fetch cannot read Windows absolute paths (e.g. C:\\...).
   // These must be served by Live Server and referenced with a relative URL.
-  const SOIL_MOISTURE_DIR = 'ERA5_SOIL/';
-  const SOIL_MOISTURE_CSV = SOIL_MOISTURE_DIR + 'soil_moisture_simple.csv';
-  const SOIL_MOISTURE_FALLBACK_CSV = SOIL_MOISTURE_DIR + 'Mujib_ERA5Land_SM028_monthly_2015_01_to_2026_01.csv';
-  const SOIL_MOISTURE_SUMMARY_JSON = SOIL_MOISTURE_DIR + 'soil_moisture_summary_Mujib.json';
+  const SOIL_MOISTURE_DIR = '';
+  const SOIL_MOISTURE_CSV = 'soil_moisture_simple.csv';
+  const SOIL_MOISTURE_FALLBACK_CSV = 'Mujib_ERA5Land_SM028_monthly_2015_01_to_2026_01.csv';
+  const SOIL_MOISTURE_SUMMARY_JSON = 'soil_moisture_summary_Mujib.json';
 
   // Subbasin locations (precomputed representative point lat/lon for ALL 429)
   const SUBBASIN_LOC_JSON = 'subbasin_locations_ALL429.json';
@@ -5212,8 +5221,8 @@ body.hasAssetPanel #eguDemoPanel{
   const SUBBASIN_PLACE_JSON = 'subbasin_places_ALL429.json';
 
   // Precomputed enrichment outputs used by the brief panel (kept as stable filenames so paths do not need to change).
-  const SUBBASIN_PROFILE_JSON = 'planner/subbasin_indicator_profiles_clean.json';
-  const SUBBASIN_MASTER_JSON = 'planner/subbasin_master_enriched_clean.json';
+  const SUBBASIN_PROFILE_JSON = 'subbasin_indicator_profiles_clean.json';
+  const SUBBASIN_MASTER_JSON = 'subbasin_master_enriched_clean.json';
 
   // LoD1 buildings (put next to index.html)
   // Use the clipped version to avoid buildings outside the official basin.
@@ -5228,11 +5237,11 @@ body.hasAssetPanel #eguDemoPanel{
 
   // NDVI (Sentinel-2) processed PNGs + bounds (place folder next to this HTML)
   // Used ONLY for click-to-value (no map overlay)
-  const NDVI_BOUNDS_SCALES_JSON = 'NDVI_CESIUM_PREVIEW_4326/s2_bounds_scales.json';
+  const NDVI_BOUNDS_SCALES_JSON = 's2_bounds_scales.json';
   const NDVI_PNG = {
-    baseline: 'NDVI_CESIUM_PREVIEW_4326/s2_baseline.png', // Baseline NDVI (2015-2017)
-    recent:   'NDVI_CESIUM_PREVIEW_4326/s2_recent.png',   // Recent NDVI (2023-2025)
-    delta:    'NDVI_CESIUM_PREVIEW_4326/s2_delta.png'     // Delta NDVI (Recent − Baseline)
+    baseline: 's2_baseline.png', // Baseline NDVI (2015-2017)
+    recent:   's2_recent.png',   // Recent NDVI (2023-2025)
+    delta:    's2_delta.png'     // Delta NDVI (Recent − Baseline)
   };
 
   // Colour NDVI overlays for map display. These PNGs are colour‑coded versions of the NDVI datasets
@@ -5240,16 +5249,16 @@ body.hasAssetPanel #eguDemoPanel{
   // same folder as this HTML file.
   
 const NDVI_COLOR_PNG = {
-    baseline: 'NDVI_CESIUM_PREVIEW_4326/s2_baseline_color.png',
-    recent:   'NDVI_CESIUM_PREVIEW_4326/s2_recent_color.png',
-    delta:    'NDVI_CESIUM_PREVIEW_4326/s2_delta_color.png'
+    baseline: 's2_baseline_color.png',
+    recent:   's2_recent_color.png',
+    delta:    's2_delta_color.png'
   };
 
   // Suitability overlays (Cesium-ready EPSG:4326 PNGs generated from the cleaned suitability TIFFs)
   // Keep these files next to the HTML in: Suitability/SUITABILITY_CESIUM_4326/
   const SUITABILITY_PNG = {
-    marab: 'Suitability/SUITABILITY_CESIUM_4326/marab_suitability_color_4326.png',
-    vallerani: 'Suitability/SUITABILITY_CESIUM_4326/vallerani_suitability_color_4326.png'
+    marab: 'marab_suitability_color_4326.png',
+    vallerani: 'vallerani_suitability_color_4326.png'
   };
   const SUITABILITY_EXTENT = {
     west: 35.561814748331194,
@@ -5266,9 +5275,9 @@ const NDVI_COLOR_PNG = {
     north: 31.90536116582214
   };
   const CANDIDATE_PNG = {
-    marab: 'Suitability/SUITABILITY_CESIUM_4326/marab_candidate_gt80_4326.png',
-    vallerani: 'Suitability/SUITABILITY_CESIUM_4326/vallerani_candidate_gt80_4326.png',
-    combined: 'Suitability/SUITABILITY_CESIUM_4326/combined_candidate_gt80_4326.png'
+    marab: 'marab_candidate_gt80_4326.png',
+    vallerani: 'vallerani_candidate_gt80_4326.png',
+    combined: 'combined_candidate_gt80_4326.png'
   };
 
   // Dam English name overrides (Arabic -> English)
@@ -7015,7 +7024,7 @@ function renderBuildingPanel(entity){
   async function loadCandidateManifest() {
     if (candidateManifest) return candidateManifest;
     try {
-      const resp = await fetch('Suitability/SUITABILITY_CESIUM_4326/candidate_overlay_bounds_all_thresholds.json');
+      const resp = await fetch(withCacheBust('candidate_overlay_bounds_all_thresholds.json'));
       if (!resp.ok) throw new Error('HTTP ' + resp.status);
       candidateManifest = await resp.json();
       return candidateManifest;
@@ -7857,7 +7866,6 @@ function toggleExpandablePanel(mainId, panelId) {
   // ============================
   const SCREENING_LAYER_ID = 'screeningSubbasins';
   const SCREENING_GEOJSON_CANDIDATES = [
-    'planner/subbasin_screening_map.geojson',
     'subbasin_screening_map.geojson'
   ];
   const SCREENING_CLASS_ORDER = ['Vallerani priority', 'Marab priority', 'Both feasible', 'Monitor', 'Unresolved'];
