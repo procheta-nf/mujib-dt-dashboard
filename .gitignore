@@ -1,0 +1,29 @@
+# Processing artifacts (never deploy)
+*.ipynb
+*.parquet
+*.tif
+*.tfw
+*.pgw
+*.py
+*.aux.xml
+*BACKUP*
+*STALE*
+output_*.csv
+
+# Source data folders
+NDVI_PROCESSED/
+NDVI_ANALYSIS_OUTPUTS/
+figures_*/
+validation_outputs/
+scripts/
+.venv/
+__pycache__/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/

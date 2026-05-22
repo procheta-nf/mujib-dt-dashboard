@@ -1,0 +1,105 @@
+{
+  "crs": "EPSG:4326",
+  "west": 35.561814748331194,
+  "south": 30.63966906557778,
+  "east": 36.56625284778243,
+  "north": 31.923214524898427,
+  "width": 1655,
+  "height": 2000,
+  "layers": {
+    "marab": {
+      "title": "Marab suitability",
+      "system": "Marab + barley",
+      "value_png": "marab_suitability_value_4326.png",
+      "color_png": "marab_suitability_color_4326.png",
+      "vmin": 40.342185974121094,
+      "vmax": 94.93281555175781,
+      "valid_pixels": 1476505,
+      "classes": [
+        {
+          "min": 40.34,
+          "max": 50.0,
+          "label": "40.34\u201350",
+          "color": "#F44316"
+        },
+        {
+          "min": 50.0,
+          "max": 60.0,
+          "label": "50\u201360",
+          "color": "#F98A00"
+        },
+        {
+          "min": 60.0,
+          "max": 70.0,
+          "label": "60\u201370",
+          "color": "#F2CD00"
+        },
+        {
+          "min": 70.0,
+          "max": 80.0,
+          "label": "70\u201380",
+          "color": "#B7D300"
+        },
+        {
+          "min": 80.0,
+          "max": 90.0,
+          "label": "80\u201390",
+          "color": "#6EAA00"
+        },
+        {
+          "min": 90.0,
+          "max": 94.93,
+          "label": "90\u201394.93",
+          "color": "#005A0A"
+        }
+      ]
+    },
+    "vallerani": {
+      "title": "Vallerani suitability",
+      "system": "Vallerani + saltbush",
+      "value_png": "vallerani_suitability_value_4326.png",
+      "color_png": "vallerani_suitability_color_4326.png",
+      "vmin": 47.08399963378906,
+      "vmax": 98.28604888916016,
+      "valid_pixels": 1476505,
+      "classes": [
+        {
+          "min": 47.08,
+          "max": 50.0,
+          "label": "47.08\u201350",
+          "color": "#F44316"
+        },
+        {
+          "min": 50.0,
+          "max": 60.0,
+          "label": "50\u201360",
+          "color": "#F98A00"
+        },
+        {
+          "min": 60.0,
+          "max": 70.0,
+          "label": "60\u201370",
+          "color": "#F2CD00"
+        },
+        {
+          "min": 70.0,
+          "max": 80.0,
+          "label": "70\u201380",
+          "color": "#B7D300"
+        },
+        {
+          "min": 80.0,
+          "max": 90.0,
+          "label": "80\u201390",
+          "color": "#6EAA00"
+        },
+        {
+          "min": 90.0,
+          "max": 98.29,
+          "label": "90\u201398.29",
+          "color": "#005A0A"
+        }
+      ]
+    }
+  }
+}
