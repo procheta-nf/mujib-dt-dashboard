@@ -5249,16 +5249,16 @@ body.hasAssetPanel #eguDemoPanel{
   // same folder as this HTML file.
   
 const NDVI_COLOR_PNG = {
-    baseline: 's2_baseline_color.png',
-    recent:   's2_recent_color.png',
-    delta:    's2_delta_color.png'
+    baseline: DATA_BASE + 's2_baseline_color.png',
+    recent:   DATA_BASE + 's2_recent_color.png',
+    delta:    DATA_BASE + 's2_delta_color.png'
   };
 
   // Suitability overlays (Cesium-ready EPSG:4326 PNGs generated from the cleaned suitability TIFFs)
   // Keep these files next to the HTML in: Suitability/SUITABILITY_CESIUM_4326/
   const SUITABILITY_PNG = {
-    marab: 'marab_suitability_color_4326.png',
-    vallerani: 'vallerani_suitability_color_4326.png'
+    marab: DATA_BASE + 'marab_suitability_color_4326.png',
+    vallerani: DATA_BASE + 'vallerani_suitability_color_4326.png'
   };
   const SUITABILITY_EXTENT = {
     west: 35.561814748331194,
@@ -5275,9 +5275,9 @@ const NDVI_COLOR_PNG = {
     north: 31.90536116582214
   };
   const CANDIDATE_PNG = {
-    marab: 'marab_candidate_gt80_4326.png',
-    vallerani: 'vallerani_candidate_gt80_4326.png',
-    combined: 'combined_candidate_gt80_4326.png'
+    marab: DATA_BASE + 'marab_candidate_gt80_4326.png',
+    vallerani: DATA_BASE + 'vallerani_candidate_gt80_4326.png',
+    combined: DATA_BASE + 'combined_candidate_gt80_4326.png'
   };
 
   // Dam English name overrides (Arabic -> English)
